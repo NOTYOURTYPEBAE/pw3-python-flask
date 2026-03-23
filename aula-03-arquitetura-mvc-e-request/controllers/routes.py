@@ -16,6 +16,11 @@ def init_app(app):
                     'Atari',
                     '3DS'
                 ]
+            
+            listaGames = [{'titulo':'CS-GO', 
+                          'ano':2012, 
+                          'categoria':'FPS-Online',
+                          'plataforma':'PC(Windows)'}]
 
             @app.route('/')
             def home():
@@ -57,3 +62,14 @@ def init_app(app):
                 return render_template('consoles.html',
                                     console=console,
                                     listaConsoles=listaConsoles)
+                
+                
+            @app.route ('/cadgames', methods=['GET','POST'])
+            def cadgames():
+                #Recebendo os dados do formulario e enviando para a página
+                #Verificando se a requisição do usuário é igual a post
+                if request.method=='POST':
+                     #Aqui ele irá gravar os dados na lista de jogos
+                     listaGames.append({'titulo':request.form.get('titulo'), 'ano':request.form.get('ano'), 'categoria':request.form.get('categoria'), 'plataforma':request.form.get('plataforma')})
+                     
+                return render_template('cadgames.html', listaGames=listaGames)
