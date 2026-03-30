@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyBooks - Biblioteca Pessoal</title>
+{% extends 'base.html' %}
+
+{%block content%}
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -277,8 +274,7 @@
             }
         }
     </style>
-</head>
-<body>
+
     <div class="container">
         <h1>📚 MyBooks - Sua Biblioteca Pessoal</h1>
         
@@ -364,5 +360,5 @@
            
         </div>
     </div>
-</body>
-</html>
+
+    {% endblock content %}
