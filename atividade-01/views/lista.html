@@ -314,36 +314,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for livro in listaLivros %}
                     <tr>
-                        <td><strong>Melhor do que nos filmes</strong></td>
-                        <td><span class="categoria">Romance</span></td>
-                        <td class="autor-destaque">Lynn Painter</td>
+                        <td><strong>{{livro.livro}}</strong></td>
+                        <td><span class="categoria">{{livro.genero}}</span></td>
+                        <td class="autor-destaque">{{livro.autor}}</td>
                     </tr>
-                    <tr>
-                        <td><strong>A Empregada</strong></td>
-                        <td><span class="categoria">Suspense</span></td>
-                        <td class="autor-destaque">Freida Mcfadden</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Nunca Minta</strong></td>
-                        <td><span class="categoria">Suspense</span></td>
-                        <td class="autor-destaque">Freida Mcfadden</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Quarta Asa</strong></td>
-                        <td><span class="categoria">Fantasia</span></td>
-                        <td class="autor-destaque">Rebecca Yarros</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Divergente</strong></td>
-                        <td><span class="categoria">Distopia</span></td>
-                        <td class="autor-destaque">Veronica Roth</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Diário de uma paixão</strong></td>
-                        <td><span class="categoria">Romance</span></td>
-                        <td class="autor-destaque">Nicholas Sparks</td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
             

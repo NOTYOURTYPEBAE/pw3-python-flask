@@ -1,4 +1,3 @@
-
 {%block content%}
 <style>
         body {
@@ -44,7 +43,7 @@
             font-size: 16px;
         }
         
-        input, select {
+        input {
             width: 100%;
             padding: 12px;
             border: 2px solid #bdc3c7;
@@ -55,14 +54,14 @@
             transition: all 0.3s;
         }
         
-        input:focus, select:focus {
+        input:focus {
             border-color: #4a90e2;
             background-color: white;
             box-shadow: 0 0 8px rgba(74,144,226,0.3);
             outline: none;
         }
         
-        input:hover, select:hover {
+        input:hover {
             border-color: #7f8c8d;
             background-color: white;
         }
@@ -116,65 +115,33 @@
     </style>
 
     <div class="formulario">
-        <h1>📖 Cadastro de Livro</h1>
+        <h1>🏢 Cadastro de Editora</h1>
         
-        <form action="{{url_for('formulario')}}" method="post">
+        <form action="{{url_for('editoras')}}" method="post">
             <div class="campo">
                 <label>
-                    <span class="icone">📕</span> 
-                    Nome do Livro <span class="obrigatorio">*</span>
+                    <span class="icone">📚</span> 
+                    Nome da Editora <span class="obrigatorio">*</span>
                 </label>
                 <input type="text" 
-                       name="livro" 
-                       placeholder="Ex: Dom Casmurro, 1984, O Alquimista" 
+                       name="editora" 
+                       placeholder="Ex: Companhia das Letras, Editora Abril" 
                        required
                        maxlength="100">
-                <div class="dica">Máximo de 100 caracteres</div>
-            </div>
-            
-            <div class="campo">
-                <label>
-                    <span class="icone">🏷️</span> 
-                    Gênero <span class="obrigatorio">*</span>
-                </label>
-                <select name="genero" required>
-                    <option value="" disabled selected>Selecione o gênero literário</option>
-                    <option value="romance">📚 Romance</option>
-                    <option value="ficcao">🚀 Ficção Científica</option>
-                    <option value="fantasia">🧙 Fantasia</option>
-                    <option value="suspense">🔍 Suspense/Terror</option>
-                    <option value="biografia">👤 Biografia</option>
-                    <option value="historia">📜 História</option>
-                    <option value="poesia">📝 Poesia</option>
-                    <option value="infantil">🧸 Infantil</option>
-                    <option value="autoajuda">💪 Autoajuda</option>
-                    <option value="tecnico">💻 Técnico/Científico</option>
-                    <option value="outro">❓ Outro</option>
-                </select>
-            </div>
-            
-            <div class="campo">
-                <label>
-                    <span class="icone">✍️</span> 
-                    Autor(a) <span class="obrigatorio">*</span>
-                </label>
-                <input type="text" 
-                       name="autor" 
-                       placeholder="Ex: Machado de Assis, George Orwell" 
-                       required
-                       maxlength="80">
-                <div class="dica">Nome completo do autor</div>
+                <div class="dica">Digite o nome da editora (máx. 100 caracteres)</div>
             </div>
             
             <button type="submit" class="botao">
-                ✅ Cadastrar Livro
+                ✅ Cadastrar Editora
             </button>
             
             <div class="rodape">
-              <a href="/lista" style="color: rgb(45, 69, 175); margin: 0 10px;">Livros listados</a>|<a href="/" style="color: rgb(45, 69, 175); margin: 0 10px;">Início</a> |    * Campos obrigatórios
+              <a href="/editoras" style="color: rgb(45, 69, 175); margin: 0 10px;">Editoras listadas</a> |
+              <a href="/" style="color: rgb(45, 69, 175); margin: 0 10px;">Início</a> |
+              * Campos obrigatórios
             </div>
            
         </form>
     </div>
 
-    {%endblock content%}
+{%endblock content%}
