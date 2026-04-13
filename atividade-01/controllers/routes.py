@@ -43,7 +43,6 @@ def init_app(app):
         
         return render_template('formulario.html')
     
-    @app.route("/editoras")
-    def listar_editoras():
-        
-        return render_template("editoras.html", listaEditoras=lista_editoras)
+    @app.route('/editoras', methods= ['GET', 'POST'])
+    def lista_editoras():
+        return render_template("editoras.html", lista_editoras=lista_editoras)
