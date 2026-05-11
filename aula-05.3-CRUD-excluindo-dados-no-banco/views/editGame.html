@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-6 m-auto">
+    <h3 style="text-align: center;">Editar jogo:</h3>
+<form action="" method="post">
+<input type="text" name="titulo" class="form-control" required>
+<input type="number" name="ano" class="form-control" required>
+<input type="text" name="categoria" class="form-control" required>
+<input type="text" name="plataforma" class="form-control" required>
+<input type="number" name="preco" class="form-control" required>
+<input type="number" name="quantidade" class="form-control" required>
+<!--BOTÕES-->
+<button type="submit" class="btn btn-warning">Alterar</button>
+<button type="reset" class="btn btn-danger">Limpar</button>
+</form>
+</div>
+
+
+{% endblock content %}
