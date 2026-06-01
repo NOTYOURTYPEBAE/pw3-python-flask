@@ -20,6 +20,10 @@ app.config['DATABASE_NAME']=DB_NAME
 #Passando o endereço do banco para o flask-sqlalchemy
 app.config['SQLALCHEMY_DATABASE_URI']=f'mysql://root@localhost/{DB_NAME}'
 
+#definindo uma chave secreta (flash messages e sessões)
+app.config['SECRET_KEY'] = '1234'
+
+
 #Models:Manipulação dos dados do sistema
 #Views:Interação com os usuários
 #Controllers:Tratar as requisições. Camadas de controle

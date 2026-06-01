@@ -2,6 +2,16 @@
 
 {% block content %}
 
+<!--buscando e exibindo as flash messages-->
+{% with messages = get_flashed_messages(with_categories=true) %}
+
+{% for category, message in messages %}
+    <div class="alert alert-{{category}}">
+        {{message}}
+    </div>
+{%endfor%}
+{%endwith   %}
+
 <!-- Pagina de cadastro -->
 <div class="container ">
 <div class="card mt-4">

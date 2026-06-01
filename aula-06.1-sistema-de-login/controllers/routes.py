@@ -1,9 +1,12 @@
 
-from flask import render_template, request,redirect, url_for
+from flask import render_template, request,redirect, url_for, flash,session
+
+#Importando o markupsafe (permite incluir links nas flash messages)
+from markupsafe import Markup
 
 from models.database import Game, db,Console, Usuario
 #importando biblioteca werkzeug
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # criando a função principal para incializar as rotas
 
@@ -152,16 +155,48 @@ def init_app(app):
                 if request.method=='POST':
                     email=request.form['email']
                     senha=request.form['senha']
+                    #verificando se o usuario já existe
+                    usuario=Usuario.query.filter_by(email=email).first()
+                    #verificando se a consulta retornou algo
+                    if usuario:
+                        msgUsuario = Markup("Usuário já cadastrado. Faça o <a href='/login'>login </a>")
+                        flash(msgUsuario, 'danger')
+                        return redirect(url_for('cadastro'))    
+                                    
                     #gerando o hash de senha (criptografia)
                     senha_com_hash=generate_password_hash(senha,method='scrypt')
                     
                     novo_usuario=Usuario(email=email,senha=senha_com_hash)
                     db.session.add(novo_usuario)
                     db.session.commit()
-                    return redirect(url_for('login'))
+                    
+                    #gerando mensagem de sucesso
+                    msgCad=Markup("Cadastro realizado com sucesso! Você já pode fazer o <a href='/login'>login</a>")
+                    flash(msgCad, 'success')
+                    
+                    return redirect(url_for('cadastro'))
                         
                 return render_template('cadastro.html')
             
-            @app.route('/login')
+            @app.route('/login', methods=['GET','POST'])
             def login():
+                #verificando se o metodo é post
+                if request.method=='POST':
+                    #coletando dados do formulario
+                    email=request.form['email']
+                    senha=request.form['senha']
+                    #buscando o usuario pelo banco pelo email
+                    usuario=Usuario.query.filter_by(email=email).first()
+                    #se o usuario existir
+                    if usuario:
+                        #verificando a senha
+                        if check_password_hash(usuario.senha,senha):
+                            #aqui será criado a sessão
+                            session['usuario_id']=usuario.id
+                            session['usuario_email']=usuario.email
+                            msgLogin="Você foi autenticado com sucesso! Bem-vindo!"
+                            flash(msgLogin, 'success')
+                                            
                 return render_template('login.html')
+            
+            #pacotes/ bibliotecas sistemas de login: werkzeug, flash, markup safe, session
