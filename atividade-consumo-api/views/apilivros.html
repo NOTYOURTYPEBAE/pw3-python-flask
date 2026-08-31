@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4" style='background-color: #f8f9fa; border-radius: 8px; padding: 20px;'>
+    
+    <div class="row">
+        <div class="col-12">
+            <h2 class="mb-4">
+                <i class="fas fa-book"></i> Nossa Coleção
+            </h2>
+            <p class="text-muted">Explore livros populares disponíveis</p>
+        </div>
+    </div>
+    
+    <!-- Mensagem de boas-vindas -->
+    {% if mensagem %}
+        <div class="alert alert-success" role="alert">
+            <i class="fas fa-check-circle"></i> {{ mensagem }}
+        </div>
+    {% endif %}
+
+    <!-- Lista de livros -->
+    <div class="row">
+        {% if livros %}
+            {% for livro in livros %}
+                <div class="col-md-3 m-auto mb-4">
+                    <div class="card" style="width: 16rem; height: 100%;">
+                        <!-- Container da imagem -->
+                        <div class="book-cover-container" style="height: 250px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); overflow: hidden; position: relative;">
+                            <img class="book-cover" 
+                                 src="{{ livro.capa_1 if livro.capa_1 else livro.capa_fallback }}"
+                                 alt="Capa do livro {{ livro.titulo }}"
+                                 style="width: 100%; height: 100%; object-fit: cover;"
+                                 onerror="this.src='{{ livro.capa_fallback }}';">
+                        </div>
+                        
+                        <div class="card-body">
+                            <h5>{{ livro.titulo }}</h5>
+                            <p><strong>Autor:</strong> {{ livro.autor }}</p>
+                            <p><strong>Ano:</strong> {{ livro.ano }}</p>
+                            <p><strong>Editora:</strong> {{ livro.editora }}</p>
+                            
+                            <!-- Botão Ler - Direciona para ler o livro online -->
+                            {% if livro.isbn %}
+                                <a href="https://openlibrary.org/isbn/{{ livro.isbn }}" class="btn btn-danger w-100" target="_blank">Ler</a>
+                            {% elif livro.olid %}
+                                <a href="https://openlibrary.org/books/{{ livro.olid }}" class="btn btn-danger w-100" target="_blank">Ler</a>
+                            {% else %}
+                                <a href="#" class="btn btn-secondary w-100" disabled>Ler</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12 text-center py-5">
+                <i class="fas fa-exclamation-circle" style="font-size: 3rem; color: #dc3545;"></i>
+                <h4 class="mt-3">Nenhum livro disponível no momento</h4>
+                <p class="text-muted">Por favor, tente novamente mais tarde</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+    .card {
+        transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    
+    .book-cover-container {
+        position: relative;
+    }
+</style>
+{% endblock %}
